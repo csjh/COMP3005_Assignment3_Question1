@@ -56,6 +56,7 @@ while True:
     print("4. List all students")
     print("5. Exit")
     choice = input("Enter your choice: ")
+    print()
 
     if choice == "1":
         first_name = input("Enter first name: ")
@@ -74,9 +75,9 @@ while True:
         students = getAllStudents()
         print("ID | First Name | Last Name | Email | Enrollment Date")
         for student in students:
-            print(student)
+            print(' | '.join(map(str, student)))
     elif choice == "5":
         break
     else:
         print("Invalid choice")
-        continue
+    print()
