@@ -1,7 +1,3 @@
-Your code must include comments explaining the purpose and functionality of each segment.
-Include a README file with:
-Steps to compile and run your application.
-
 Setup:
 - Install `psycopg[binary]` with pip
 - Create a database named `q1`, a user `student`, with password `studious`
