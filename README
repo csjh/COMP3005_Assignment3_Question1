@@ -3,11 +3,11 @@ Include a README file with:
 Steps to compile and run your application.
 
 Setup:
-- Install `psycopg`
+- Install `psycopg[binary]` with pip
 - Create a database named `q1`, a user `student`, with password `studious`
-- Run `Q1_initial.py` to create the table and insert the data
-- Run `Q1.py` to run the application
+- Run `scripts/migrate.py` to create the table and insert the data
+- Run `app/main.py` to run the application
 
 Running the application:
-- Run `Q1.py` to run the application
+- Run `app/main.py` to run the application
 - Supply the required inputs, and observe the output
