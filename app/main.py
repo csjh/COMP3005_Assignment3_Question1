@@ -3,6 +3,7 @@ import psycopg
 db = psycopg.connect("dbname=q1 user=student password=studious")
 
 
+# function which returns all students in the `students` table
 def getAllStudents():
     try:
         with db.cursor() as cursor:
@@ -13,6 +14,7 @@ def getAllStudents():
         return []
 
 
+# function which adds a student to the `students` table
 def addStudent(first_name, last_name, email, enrollment_date):
     try:
         with db.cursor() as cursor:
@@ -29,6 +31,7 @@ def addStudent(first_name, last_name, email, enrollment_date):
         db.rollback()
 
 
+# function which updates the email of a student in the `students` table
 def updateStudentEmail(student_id, new_email):
     try:
         with db.cursor() as cursor:
@@ -46,6 +49,7 @@ def updateStudentEmail(student_id, new_email):
         db.rollback()
 
 
+# function which deletes a student from the `students` table
 def deleteStudent(student_id):
     try:
         with db.cursor() as cursor:
@@ -62,6 +66,7 @@ def deleteStudent(student_id):
         db.rollback()
 
 
+# event loop for main program execution
 while True:
     print("1. Add student")
     print("2. Update student email")
