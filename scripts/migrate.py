@@ -3,10 +3,11 @@ import psycopg
 db = psycopg.connect("dbname=q1 user=student password=studious")
 
 with db.cursor() as cursor:
-    # Create the students table if it doesn't exist
+    # Reset the students table
+    cursor.execute("DROP TABLE IF EXISTS students")
     cursor.execute(
         """
-        CREATE TABLE IF NOT EXISTS students (
+        CREATE TABLE students (
             student_id SERIAL PRIMARY KEY,
             first_name TEXT NOT NULL,
             last_name TEXT NOT NULL,
