@@ -10,15 +10,19 @@ def getAllStudents():
 
 
 def addStudent(first_name, last_name, email, enrollment_date):
-    with db.cursor() as cursor:
-        cursor.execute(
-            """
-            INSERT INTO students (first_name, last_name, email, enrollment_date)
-            VALUES (%s, %s, %s, %s)
-        """,
-            (first_name, last_name, email, enrollment_date),
-        )
-        db.commit()
+    try:
+        with db.cursor() as cursor:
+            cursor.execute(
+                """
+                INSERT INTO students (first_name, last_name, email, enrollment_date)
+                VALUES (%s, %s, %s, %s)
+            """,
+                (first_name, last_name, email, enrollment_date),
+            )
+            db.commit()
+    except Exception as e:
+        print(e)
+        db.rollback()
 
 
 def updateStudentEmail(student_id, new_email):
