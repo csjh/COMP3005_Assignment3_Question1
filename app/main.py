@@ -4,9 +4,13 @@ db = psycopg.connect("dbname=q1 user=student password=studious")
 
 
 def getAllStudents():
-    with db.cursor() as cursor:
-        cursor.execute("SELECT * FROM students")
-        return cursor.fetchall()
+    try:
+        with db.cursor() as cursor:
+            cursor.execute("SELECT * FROM students")
+            return cursor.fetchall()
+    except Exception as e:
+        print(e)
+        return []
 
 
 def addStudent(first_name, last_name, email, enrollment_date):
@@ -26,28 +30,37 @@ def addStudent(first_name, last_name, email, enrollment_date):
 
 
 def updateStudentEmail(student_id, new_email):
-    with db.cursor() as cursor:
-        cursor.execute(
-            """
-            UPDATE students
-            SET email = %s
-            WHERE student_id = %s
-        """,
-            (new_email, student_id),
-        )
-        db.commit()
+    try:
+        with db.cursor() as cursor:
+            cursor.execute(
+                """
+                UPDATE students
+                SET email = %s
+                WHERE student_id = %s
+            """,
+                (new_email, student_id),
+            )
+            db.commit()
+    except Exception as e:
+        print(e)
+        db.rollback()
 
 
 def deleteStudent(student_id):
-    with db.cursor() as cursor:
-        cursor.execute(
-            """
-            DELETE FROM students
-            WHERE student_id = %s
-        """,
-            (student_id,),
-        )
-        db.commit()
+    try:
+        with db.cursor() as cursor:
+            cursor.execute(
+                """
+                DELETE FROM students
+                WHERE student_id = %s
+            """,
+                (student_id,),
+            )
+            db.commit()
+    except Exception as e:
+        print(e)
+        db.rollback()
+
 
 while True:
     print("1. Add student")
@@ -75,7 +88,7 @@ while True:
         students = getAllStudents()
         print("ID | First Name | Last Name | Email | Enrollment Date")
         for student in students:
-            print(' | '.join(map(str, student)))
+            print(" | ".join(map(str, student)))
     elif choice == "5":
         break
     else:
